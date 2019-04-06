@@ -9,15 +9,17 @@ def print_help():
 
 def main_loop(file_name):
 
-    face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+    face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
     capture = cv2.VideoCapture(file_name)
 
     while(capture.isOpened()):
         ret, frame = capture.read()
 
         if(frame is not None):
-            faces = face_cascade.detectMultiScale(frame,scaleFactor= 1.1, minNeighbors=2,minSize= (10,10))
-            print('Detected faces:', len(faces))
+            faces = face_cascade.detectMultiScale(frame,scaleFactor= 1.2, minNeighbors=3)#,minSize= (20,20))
+            #print('Detected faces:', len(faces))
+            for (x,y,w,h) in faces:
+                cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
             cv2.imshow('frame',frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
