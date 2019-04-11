@@ -15,7 +15,7 @@ def main_loop(src_file, output):
     face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
     capture = cv2.VideoCapture(src_file)
     length = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
-    file = open(output,'ab')
+    file = open(output+'.pkl','ab')
     i = 0
     while(capture.isOpened()):
         ret, frame = capture.read()
