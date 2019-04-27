@@ -2,6 +2,11 @@ import cv2
 import numpy as np
 import sys
 import os.path
+import PyQt5
+from PyQt5 import QtGui, QtCore, QtWidgets
+
+
+
 
 def print_help():
     print(f'Usage:')
