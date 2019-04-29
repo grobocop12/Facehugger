@@ -55,7 +55,7 @@ def detect_face_mass(img):
         (x, y, w, h) = morda
         mordadata = [gray[y:y + w, x:x + h], morda]
         facedata.append(mordadata)
-        
+
     # return only the face part of the image
     return facedata
 
@@ -163,8 +163,9 @@ def predict(test_img):
                 label, confidence = face_recognizer.predict(face)
     # get name of respective label returned by face recognizer
                 label_text = subjects[label]
-                if(confidence<10):
+                if(confidence<46):
                     label_text = "Unknow"
+
 
     # draw a rectangle around face detected
                 draw_rectangle(img, rect)
