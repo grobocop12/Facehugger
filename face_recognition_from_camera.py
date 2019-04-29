@@ -26,10 +26,38 @@ def detect_face(img):
 
     # under the assumption that there will be only one face,
     # extract the face area
+
     (x, y, w, h) = faces[0]
 
     # return only the face part of the image
     return gray[y:y + w, x:x + h], faces[0]
+
+def detect_face_mass(img):
+    # convert the test image to gray image as opencv face detector expects gray images
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    # load OpenCV face detector, I am using LBP which is fast
+    # there is also a more accurate but slow Haar classifier
+    face_cascade = cv2.CascadeClassifier('opencv-files/lbpcascade_frontalface.xml')
+
+    # let's detect multiscale (some images may be closer to camera than others) images
+    # result is a list of faces
+    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5);
+
+    # if no faces are detected then return original img
+    if (len(faces) == 0):
+        return None, None
+
+    # under the assumption that there will be only one face,
+    # extract the face area
+    facedata = []
+    for morda in faces:
+        (x, y, w, h) = morda
+        mordadata = [gray[y:y + w, x:x + h], morda]
+        facedata.append(mordadata)
+        
+    # return only the face part of the image
+    return facedata
 
 
 def prepare_training_data(data_folder_path):
@@ -125,19 +153,23 @@ def predict(test_img):
     # make a copy of the image as we don't want to chang original image
     img = test_img.copy()
     # detect face from the image
-    face, rect = detect_face(img)
-    if face is not None:
+    facedata = detect_face_mass(img)
+
+    if facedata is not None:
+        for morda in facedata:
     # predict the image using our face recognizer
-        label, confidence = face_recognizer.predict(face)
+            if(morda is not None):
+                [face,rect] = morda
+                label, confidence = face_recognizer.predict(face)
     # get name of respective label returned by face recognizer
-        label_text = subjects[label]
-        if(confidence<10):
-            label_text = "Unknow"
+                label_text = subjects[label]
+                if(confidence<10):
+                    label_text = "Unknow"
 
     # draw a rectangle around face detected
-        draw_rectangle(img, rect)
+                draw_rectangle(img, rect)
     # draw name of predicted person
-        draw_text(img, label_text, rect[0], rect[1] - 5)
+                draw_text(img, label_text, rect[0], rect[1] - 5)
 
     return img
 
