@@ -5,7 +5,7 @@ import os
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 cap = cv2.VideoCapture(0)
 
-subjects = ["", "Ramiz Raja", "Elvis Presley","Kamil Szkaradnik","Nicolas Cage","Jack Sparrow","Rosamund Pike"]
+subjects = ["", "Piotr Blaski", "Elvis Presley","Kamil Szkaradnik","Nicolas Cage","Kasia Siwiec"]
 
 
 def detect_face(img):
@@ -163,7 +163,7 @@ def predict(test_img):
                 label, confidence = face_recognizer.predict(face)
     # get name of respective label returned by face recognizer
                 label_text = subjects[label]
-                if(confidence<50):
+                if(confidence<40):
                     label_text = "Unknow"
 
 
