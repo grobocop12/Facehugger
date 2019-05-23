@@ -10,7 +10,7 @@ import imutils
 import time
 import cv2
 import numpy
-
+import face_recognition
 
 
 
@@ -23,6 +23,8 @@ ap.add_argument("-t", "--tracker", type=str, default="kcf",
 args = vars(ap.parse_args())
 track_list = []
 name_list = []
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
+
 
 def make_name():
         name = ''
@@ -98,8 +100,21 @@ while True:
         frame = imutils.resize(frame, width=500)
         (H, W) = frame.shape[:2]
 
+        if len(track_list) <1:
+                face_locations = face_cascade.detectMultiScale(frame, 1.3, 5)
+                # start OpenCV object tracker using the supplied bounding box
+                # coordinates, then start the FPS throughput estimator as well
+                for (x,y,w,h) in face_locations:
+                        initBB = (x,y,w,h)
+                        tracker  = make_tracker()
+                        print(type(tracker))
+                        tracker.init(frame, initBB)
+                        track_list.append(tracker)
+                        name_list.append('twarz')
+                
+
         # check to see if we are currently tracking an object
-        if initBB is not None:
+        if True:
                 # grab the new bounding box coordinates of the object
                 i=0
                 for one_tracker in track_list:
@@ -111,9 +126,8 @@ while True:
                                 cv2.rectangle(frame, (x, y), (x + w, y + h),(0, 255, 0), 2)
                                 cv2.putText(frame, tag, (x, y),cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
                 # update the FPS counter
-                        fps.update()
-                        i = i+1
-                        fps.stop()
+                        i +=1
+                        
 
 
 
@@ -124,13 +138,13 @@ while True:
 
         # if the 's' key is selected, we are going to "select" a bounding
         # box to track
+        '''
         if key == ord("s"):
                 # select the bounding box of the object we want to track (make
                 # sure you press ENTER or SPACE after selecting the ROI)
                 initBB = cv2.selectROI("Frame", frame, fromCenter=False,
                         showCrosshair=True)
-                print(initBB)
-                print(type(initBB))
+
                 # start OpenCV object tracker using the supplied bounding box
                 # coordinates, then start the FPS throughput estimator as well
                 tracker  =make_tracker()
@@ -138,9 +152,9 @@ while True:
                 track_list.append(tracker)
                 name_list.append(make_name())
                 fps = FPS().start()
-
+        '''
         # if the `q` key was pressed, break from the loop
-        elif key == ord("q"):
+        if key == ord("q"):
                 break
 
 # if we are using a webcam, release the pointer
