@@ -8,6 +8,8 @@ from kivy.properties import StringProperty
 import kivy
 import easygui
 import copy
+import Person
+import RecognizerGUi
 kivy.require("1.9.0")
 
 
@@ -30,10 +32,16 @@ class Faces(BoxLayout):
     picture_list = []
     face_list = ObjectProperty()
     info = StringProperty()
+    persons = []
 
     # method called by "Train" button
     def train(self):
         print("training!")
+        persons = []
+
+
+        RecognizerGUi.Start(persons)
+
 
     # adding names to list
     def submit_face(self):
@@ -95,6 +103,16 @@ class Faces(BoxLayout):
             print(faces[i].name)
             for j in range(len(faces[i].pictures)):
                 print(faces[i].pictures[j])
+
+        z = 0
+        self.persons =[]
+        for i in faces:
+            z = z + 1
+            photo = i.pictures
+            name = i.name
+            osoba = Person.Person(photo, name, z)
+            self.persons.append(osoba)
+
 
     def get_face_index(name):
         for i, f in enumerate(faces):
