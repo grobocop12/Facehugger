@@ -6,6 +6,20 @@ import time
 import cv2
 import numpy
 import Person
+import progressbar
+
+
+def make_name():
+    name = ''
+    while (True):
+
+        key = cv2.waitKeyEx() & 0xFF
+
+        if (key == 13):
+            break
+        z = chr(key)
+        name = name + z
+    return name
 
 def makerecognizer(osoby):
     face_recognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -57,8 +71,10 @@ def make_tracker():
 
 
 
-
-
+print("[INFO] Recognition start")
+bar = progressbar.ProgressBar(maxval=20, \
+    widgets=[progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
+bar.start()
 mojezdjcia = ['training-data/s3/1.jpg','training-data/s3/2.jpg','training-data/s3/3.jpg','training-data/s3/4.jpg']
 imie = 'Kamil Szkaradnik'
 id =1
@@ -76,7 +92,7 @@ name_list = []
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
 
 face_recognizer,dict = makerecognizer(Persons)
-
+bar.finish()
 print("[INFO] starting video stream...")
 vs = VideoStream(src=0).start()
 time.sleep(0.01)
@@ -122,4 +138,17 @@ while True:
 
     if key == ord("q"):
         break
+
+    if key == ord("s"):
+        # select the bounding box of the object we want to track (make
+        # sure you press ENTER or SPACE after selecting the ROI)
+        initBB = cv2.selectROI("Frame", frame, fromCenter=False,
+                               showCrosshair=True)
+
+        # start OpenCV object tracker using the supplied bounding box
+        # coordinates, then start the FPS throughput estimator as well
+        tracker = make_tracker()
+        tracker.init(frame, initBB)
+        track_list.append(tracker)
+        name_list.append(make_name())
 
