@@ -46,15 +46,16 @@ class Grid(GridLayout):
 
     def openexp(self, instance):
         self.file = easygui.fileopenbox()
-        print(self.file)
-
-    def playvid(self, instance):
         self.player.source = str(self.file)
         if self.player.source.lower().endswith(('.mp4', '.avi', '.mkv', '.flv', '.wmv')):
             print(self.player.source)
-            self.player.state = 'play'
+            self.playvid(self)
         else:
             print('this should be an error i guess')
+            self.player.state = 'stop'
+
+    def playvid(self, instance):
+        self.player.state = 'play'
 
 class VideoPlayerApp(App):
     def build(self):
@@ -62,12 +63,6 @@ class VideoPlayerApp(App):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) <= 1:
-        print('You have to pass the path to source file')
-        sys.exit()
-    if not os.path.isfile(sys.argv[1]):
-        print('Error: file not found')
-        sys.exit()
     VideoPlayerApp().run()
 
 

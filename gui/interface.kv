@@ -1,0 +1,54 @@
+# Reference interface.py
+#: import main interface
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+#: import ListItemButton kivy.uix.listview.ListItemButton
+
+Faces:
+
+<Faces>:
+    orientation: "vertical"
+    name_text_input: name
+    face_list: faces_list_view
+    padding: 10
+    spacing: 10
+
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+
+        Label:
+            text: "Name"
+        TextInput:
+            id: name
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        Button:
+            text: "Submit"
+            size_hint_x: 15
+            on_press: root.submit_face()
+        Button:
+            text: "Load pictures"
+            size_hint_x: 15
+            on_press: root.add_pictures()
+        Button:
+            text: "Delete"
+            size_hint_x: 15
+            on_press: root.delete_face()
+
+    ListView:
+        id: faces_list_view
+        adapter:
+            ListAdapter(data=[], cls=main.ListButton)
+
+    Label:
+        text_size: self.width, None
+        text: "Enter name into the textbox and press 'Submit'. Item names have to be unique.\nSelect the desired item from the list and press 'Load pictures'  to select images with a specific face to be recognized.The more different pics of the same face, the better the results.\nSelect the desired item and press 'Delete' to remove it from the list.\nItems without any loaded pictures will be ignored."
+
+    Button:
+        text: "Train!"
+        size_hint_y: None
+        height: "40dp"
+        on_press: root.train()
