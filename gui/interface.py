@@ -60,6 +60,7 @@ class Faces(BoxLayout):
             if faces:
                 faces.pop(Faces.get_face_index(selection))
             self.face_list._trigger_reset_populate()
+            #self.face_list.adapter.selection = None
         else:
             self.info = "select item to delete"
 
@@ -73,22 +74,29 @@ class Faces(BoxLayout):
             # check file extensions
             if self.picture_list:
                 self.picture_list = [x for x in self.picture_list if x.endswith('jpg') or x.endswith('png')]
+                # create new objects
+                if self.picture_list:
+                    for i in range(len(faces)):
+                        if faces[i].name == selection:
+                            faces.pop(Faces.get_face_index(selection))
+                            self.info = "item has been overwritten"
+
+                    selected_face = Face(selection, self.picture_list)
+                    faces.append(copy.copy(selected_face))
+                else:
+                    self.info = "no useful files found"
             else:
                 self.info = "no pictures have been selected"
         else:
             self.info = "select item to upload pictures"
-
-        # create new objects
-        if self.picture_list:
-            for i in range(len(faces)):
-                if faces[i].name == selection:
-                    faces.pop(Faces.get_face_index(selection))
-                    self.info = "item has been overwritten"
-
-            selected_face = Face(selection, self.picture_list)
-            faces.append(copy.copy(selected_face))
+            try:
+                selected_face = Face(selection, self.picture_list)
+                faces.append(copy.copy(selected_face))
+            except UnboundLocalError:
+                pass
         else:
             self.info = "no useful files found"
+
 
         print("list: ")
         for i in range(len(faces)):
