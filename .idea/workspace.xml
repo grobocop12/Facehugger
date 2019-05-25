@@ -16,8 +16,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Hindi/opencv-face-recognition-python-master/OpenCV-Face-Recognition-Python.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-72">
-              <caret line="306" column="27" lean-forward="true" selection-start-line="306" selection-start-column="27" selection-end-line="306" selection-end-column="27" />
+            <state relative-caret-position="5117">
+              <caret line="306" column="27" selection-start-line="306" selection-start-column="27" selection-end-line="306" selection-end-column="27" />
               <folding>
                 <element signature="e#813#823#0" expanded="true" />
               </folding>
@@ -28,8 +28,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Person.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+            <state relative-caret-position="-185">
+              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -40,8 +40,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Recognizer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+            <state relative-caret-position="272">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -52,8 +52,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/merge.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-321">
-              <caret line="135" column="8" lean-forward="true" selection-start-line="135" selection-start-column="8" selection-end-line="135" selection-end-column="35" />
+            <state relative-caret-position="2176">
+              <caret line="135" column="8" selection-start-line="135" selection-start-column="8" selection-end-line="135" selection-end-column="35" />
               <folding>
                 <element signature="e#153#190#0" expanded="true" />
               </folding>
@@ -64,8 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/face_recognition_from_camera.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="123" column="36" lean-forward="true" selection-start-line="119" selection-start-column="12" selection-end-line="123" selection-end-column="36" />
+            <state relative-caret-position="2057">
+              <caret line="123" column="36" selection-start-line="119" selection-start-column="12" selection-end-line="123" selection-end-column="36" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -93,8 +93,8 @@
         <option value="$PROJECT_DIR$/../opencv-object-tracking/opencv_object_tracking.py" />
         <option value="$PROJECT_DIR$/../Bionic_inc/ArchAge.py" />
         <option value="$PROJECT_DIR$/merge.py" />
-        <option value="$PROJECT_DIR$/Person.py" />
         <option value="$PROJECT_DIR$/Recognizer.py" />
+        <option value="$PROJECT_DIR$/Person.py" />
       </list>
     </option>
   </component>
@@ -315,16 +315,17 @@
       <workItem from="1558298969398" duration="6931000" />
       <workItem from="1558720938201" duration="1484000" />
       <workItem from="1558726252392" duration="11612000" />
+      <workItem from="1558770209820" duration="306000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82646000" />
+    <option name="totallyTimeSpent" value="82952000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4990991" visible="true" weight="0.2753404" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4990991" visible="true" weight="0.27987897" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5009009" side_tool="true" weight="0.25583205" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -365,7 +366,7 @@
     <SUITE FILE_PATH="coverage/Facehugger$ArchAge.coverage" NAME="ArchAge Coverage Results" MODIFIED="1558309155454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Bionic_inc" />
     <SUITE FILE_PATH="coverage/Facehugger$face_recognition_from_camera.coverage" NAME="face_recognition_from_camera Coverage Results" MODIFIED="1558226743714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Facehugger$opencv_object_tracking.coverage" NAME="opencv_object_tracking Coverage Results" MODIFIED="1558269916253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../opencv-object-tracking" />
-    <SUITE FILE_PATH="coverage/Facehugger$Recognizer.coverage" NAME="Recognizer Coverage Results" MODIFIED="1558765596796" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Facehugger$Recognizer.coverage" NAME="Recognizer Coverage Results" MODIFIED="1558770489125" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Facehugger$script.coverage" NAME="script Coverage Results" MODIFIED="1556496173387" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Facehugger$opencv_object_tracking__1_.coverage" NAME="opencv_object_tracking (1) Coverage Results" MODIFIED="1558270006850" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Facehugger$OpenCV_Face_Recognition_Python.coverage" NAME="OpenCV-Face-Recognition-Python Coverage Results" MODIFIED="1558726781632" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Hindi/opencv-face-recognition-python-master" />
@@ -413,38 +414,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Hindi/opencv-face-recognition-python-master/OpenCV-Face-Recognition-Python.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-72">
-          <caret line="306" column="27" lean-forward="true" selection-start-line="306" selection-start-column="27" selection-end-line="306" selection-end-column="27" />
+        <state relative-caret-position="5117">
+          <caret line="306" column="27" selection-start-line="306" selection-start-column="27" selection-end-line="306" selection-end-column="27" />
           <folding>
             <element signature="e#813#823#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/face_recognition_from_camera.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="123" column="36" lean-forward="true" selection-start-line="119" selection-start-column="12" selection-end-line="123" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/merge.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-321">
-          <caret line="135" column="8" lean-forward="true" selection-start-line="135" selection-start-column="8" selection-end-line="135" selection-end-column="35" />
+        <state relative-caret-position="2176">
+          <caret line="135" column="8" selection-start-line="135" selection-start-column="8" selection-end-line="135" selection-end-column="35" />
           <folding>
             <element signature="e#153#190#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/face_recognition_from_camera.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2057">
+          <caret line="123" column="36" selection-start-line="119" selection-start-column="12" selection-end-line="123" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Person.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+        <state relative-caret-position="-185">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
@@ -453,8 +454,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Recognizer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+        <state relative-caret-position="272">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
