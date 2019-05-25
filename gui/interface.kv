@@ -2,6 +2,7 @@
 #: import main interface
 #: import ListAdapter kivy.adapters.listadapter.ListAdapter
 #: import ListItemButton kivy.uix.listview.ListItemButton
+#: import Window kivy.core.window
 
 Faces:
 
@@ -9,46 +10,102 @@ Faces:
     orientation: "vertical"
     name_text_input: name
     face_list: faces_list_view
-    padding: 10
-    spacing: 10
+    padding: 0
+    spacing: 50
 
 
-    BoxLayout:
-        size_hint_y: None
-        height: "40dp"
+    GridLayout:
+        cols:2
+        canvas.before:
+            Color:
+                rgba: 1,1,1,1
+            Rectangle:
+                size: (self.width/2.,self.height)
+                pos: self.pos
 
-        Label:
-            text: "Name"
-        TextInput:
-            id: name
+        ListView:
+            id: faces_list_view
+            adapter:
+                ListAdapter(data=[], cls=main.ListButton)
 
-    BoxLayout:
-        size_hint_y: None
-        height: "40dp"
-        Button:
-            text: "Submit"
-            size_hint_x: 15
-            on_press: root.submit_face()
-        Button:
-            text: "Load pictures"
-            size_hint_x: 15
-            on_press: root.add_pictures()
-        Button:
-            text: "Delete"
-            size_hint_x: 15
-            on_press: root.delete_face()
 
-    ListView:
-        id: faces_list_view
-        adapter:
-            ListAdapter(data=[], cls=main.ListButton)
+        GridLayout:
+            rows: 3
+            Label:
+                text: ''
+            Label:
+                padding_x: 30
+                text_size: self.width, None
+                text: "Enter name into the textbox and press 'Submit'. Item names have to be unique.\nSelect the desired item from the list and press 'Load pictures'  to select images with a specific face to be recognized.The more different pics of the same face, the better the results.\nSelect the desired item and press 'Delete' to remove it from the list.\nItems without any loaded pictures will be ignored."
+            Label:
+                text: root.info
+                color: 230/255, 66/255, 25/255, 1
 
-    Label:
-        text_size: self.width, None
-        text: "Enter name into the textbox and press 'Submit'. Item names have to be unique.\nSelect the desired item from the list and press 'Load pictures'  to select images with a specific face to be recognized.The more different pics of the same face, the better the results.\nSelect the desired item and press 'Delete' to remove it from the list.\nItems without any loaded pictures will be ignored."
+        BoxLayout:
+            size_hint_y: None
+            height: "60dp"
+            padding: 10
 
-    Button:
-        text: "Train!"
-        size_hint_y: None
-        height: "40dp"
-        on_press: root.train()
+            TextInput:
+                id: name
+                padding: 10
+                background_color: (1,1,1,0) if self.focus else (1,1,1,0)
+                size_hint_x: 5
+                hint_text: 'Enter name'
+                canvas.before:
+                    Color:
+                        rgba: 0.3,0.3,0.3,1
+                    Line:
+                        width: 1
+                        rectangle: self.x+1, self.y+1, self.width-2, self.height-2
+            Button:
+                text: "Submit"
+                #size_hint_x: 15
+                on_press: root.submit_face()
+                background_color: 0.5, 0.5, 0.5, 1
+
+
+        BoxLayout:
+            size_hint_y: None
+            height: "70dp"
+            padding: 20, 0
+
+            Button:
+                text: "Train!"
+                size_hint_x: 15
+                background_normal: ''
+                background_color: 51/255, 204/255, 51/255, 1
+                on_press: root.train()
+                font_size: 20
+                bold: True
+
+        BoxLayout:
+            size_hint_y: None
+            height: "40dp"
+
+            Button:
+                text: "Load pictures"
+                size_hint_x: 15
+                on_press: root.add_pictures()
+                background_color: 0.5, 0.5, 0.5, 1
+
+            Button:
+                text: "Delete"
+                size_hint_x: 15
+                on_press: root.delete_face()
+                background_color: 0.5, 0.5, 0.5, 1
+
+
+
+<ListItemButton>:
+    canvas.before:
+        Color:
+            rgba: 1,1,1,1
+        Line:
+            width: 2
+            rectangle: self.x, self.y, self.width, self.height
+    background_normal: 'blank.jpg'
+    selected_color: 64/255, 191/255, 64/255, 1
+    deselected_color: 0.7, 0.7, 0.7, 1
+    color: 1,1,1,1
+    font_size: 18
