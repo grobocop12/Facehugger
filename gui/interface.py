@@ -94,9 +94,6 @@ class Faces(BoxLayout):
                 faces.append(copy.copy(selected_face))
             except UnboundLocalError:
                 pass
-        else:
-            self.info = "no useful files found"
-
 
         print("list: ")
         for i in range(len(faces)):
