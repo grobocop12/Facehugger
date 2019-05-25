@@ -24,7 +24,7 @@ def makerecognizer(osoby):
 
 def predict(face,face_recognizer):
     label, confidence = face_recognizer.predict(face)
-    if confidence>90:
+    if confidence>50:
         return  label
     else:
         return None
@@ -59,11 +59,21 @@ def make_tracker():
 
 
 
-mojezdjcia = ['training-data/s3/1.jpg','training-data/s3/2.jpg','training-data/s3/3.jpg','training-data/s3/4.jpg']
+mojezdjcia = ['Traningdata/2 (2).jpg','Traningdata/2 (1).jpg','Traningdata/2 (3).jpg']
 imie = 'Kamil Szkaradnik'
 id =1
 osoba = Person.Person(mojezdjcia,imie,id)
-Persons = [osoba]
+
+mojezdjcia = ['Traningdata/1 (1).jpg','Traningdata/1 (2).jpg','Traningdata/1 (3).jpg','Traningdata/1 (4).jpg','Traningdata/1 (5).jpg']
+imie = 'Kacper Szkaradnik'
+id =2
+osoba2 = Person.Person(mojezdjcia,imie,id)
+
+mojezdjcia = ['Traningdata/3 (1).jpg','Traningdata/3 (2).jpg','Traningdata/3 (3).jpg','Traningdata/3 (4).jpg','Traningdata/3 (5).jpg','Traningdata/3 (7).jpg']
+imie = 'Krzyś Szkaradnik'
+id =3
+osoba3 = Person.Person(mojezdjcia,imie,id)
+Persons = [osoba,osoba2,osoba3]
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-v", "--video", type=str,
@@ -73,7 +83,7 @@ ap.add_argument("-t", "--tracker", type=str, default="kcf",
 args = vars(ap.parse_args())
 track_list = []
 name_list = []
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
+face_cascade = cv2.CascadeClassifier('lbpcascade_frontalface.xml')
 
 face_recognizer,dict = makerecognizer(Persons)
 
@@ -88,9 +98,23 @@ while True:
 
     frame = imutils.resize(frame, width=500)
     (H, W) = frame.shape[:2]
-    if(Persons.__len__()>track_list.__len__()):
+    if(True):
 
-
+        i = 0
+        tracpos=[]
+        for one_tracker in track_list:
+            (success, box) = one_tracker.update(frame)
+            tag = name_list[i]
+            # check to see if the tracking was a success
+            if success:
+                (x, y, w, h) = [int(v) for v in box]
+                tracpos.append((x, y, w, h))
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                cv2.putText(frame, tag, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
+            else:
+                name_list.remove(tag)
+                track_list.remove(one_tracker)
+            i += 1
 
         face_locations = face_cascade.detectMultiScale(frame, 1.3, 5)
         # start OpenCV object tracker using the supplied bounding box
@@ -98,25 +122,53 @@ while True:
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         for (x, y, w, h) in face_locations:
             face = gray[y:y + w, x:x + h]
-            personid = predict(face,face_recognizer)
-            if(personid != None):
+            personId = predict(face, face_recognizer)
+
+            istargeted =False
+            k = 0
+            for i in tracpos:
+
+                (x1, y1, w1, h1) = i
+                if((x1 < x+0.5*w < x1+w1)and (y1<y+0.5*h<y1+h1)and (x < x1+0.5*w1 < x+w)and (y<y1+0.5*h1<y+h) ):
+                    istargeted =True
+                    if(name_list.__len__()>0):
+                        if(personId!=None and not(dict.get(personId)in name_list) and name_list[k]=="Unknow"):
+                            name_list.remove(name_list[k])
+                            track_list.remove(track_list[k])
+                            print('podmiana')
+                            print(personId)
+                        else:
+                            continue
+
+                k = k +1
+
+
+            if((personId != None)and istargeted ==False ):
+                if not(dict.get(personId)in name_list):
+                    initBB = (x, y, w, h)
+                    tracker = make_tracker()
+                    print(type(tracker))
+                    tracker.init(frame, initBB)
+                    track_list.append(tracker)
+                    name_list.append(dict.get(personId))
+                else:
+                    initBB = (x, y, w, h)
+                    tracker = make_tracker()
+                    print(type(tracker))
+                    tracker.init(frame, initBB)
+                    track_list.append(tracker)
+                    name_list.append("Unknow")
+            if(personId==None and istargeted ==False):
                 initBB = (x, y, w, h)
                 tracker = make_tracker()
                 print(type(tracker))
                 tracker.init(frame, initBB)
                 track_list.append(tracker)
-                name_list.append(dict.get(personid))
+                name_list.append("Unknow")
+
+
                 # grab the new bounding box coordinates of the object
-    i=0
-    for one_tracker in track_list:
-            (success, box) = one_tracker.update(frame)
-            tag = name_list[i]
-                # check to see if the tracking was a success
-            if success:
-                (x, y, w, h) = [int(v) for v in box]
-                cv2.rectangle(frame, (x, y), (x + w, y + h),(0, 255, 0), 2)
-                cv2.putText(frame, tag, (x, y),cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
-            i += 1
+
     cv2.imshow("Frame", frame)
     key = cv2.waitKey(1) & 0xFF
 
