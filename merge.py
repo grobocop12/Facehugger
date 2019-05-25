@@ -66,7 +66,7 @@ def make_tracker():
         # OpenCV object tracker objects
                 tracker = OPENCV_OBJECT_TRACKERS[args["tracker"]]()
 
-                return tracker
+        return tracker
 # initialize the bounding box coordinates of the object we are going
 # to track
 initBB = None
