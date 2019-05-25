@@ -60,6 +60,7 @@ class Faces(BoxLayout):
             if faces:
                 faces.pop(Faces.get_face_index(selection))
             self.face_list._trigger_reset_populate()
+            #self.face_list.adapter.selection = None
         else:
             self.info = "select item to delete"
 
@@ -85,8 +86,11 @@ class Faces(BoxLayout):
                     faces.pop(Faces.get_face_index(selection))
                     self.info = "item has been overwritten"
 
-            selected_face = Face(selection, self.picture_list)
-            faces.append(copy.copy(selected_face))
+            try:
+                selected_face = Face(selection, self.picture_list)
+                faces.append(copy.copy(selected_face))
+            except UnboundLocalError:
+                pass
         else:
             self.info = "no useful files found"
 
