@@ -37,10 +37,10 @@ class Faces(BoxLayout):
     # method called by "Train" button
     def train(self):
         print("training!")
-        persons = []
 
 
-        RecognizerGUi.Start(persons)
+
+        RecognizerGUi.Start(self.persons)
 
 
     # adding names to list
