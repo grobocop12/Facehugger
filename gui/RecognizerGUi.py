@@ -91,7 +91,7 @@ def Start(Persons):
     print("[INFO] starting video stream...")
     vs = VideoStream(src=0).start()
     time.sleep(0.01)
-
+    cv2.namedWindow('Frame',cv2.WINDOW_NORMAL)
     while True:
         frame = vs.read()
         if frame is None:
