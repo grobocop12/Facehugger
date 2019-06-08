@@ -52,8 +52,8 @@ Faces:
                 background_color: (1,1,1,0) if self.focus else (1,1,1,0)
                 size_hint_x: 5
                 multiline: False
+                on_text_validate: root.submit_face()
                 hint_text: 'Enter name'
-                multiline: False
                 canvas.before:
                     Color:
                         rgba: 0.3,0.3,0.3,1
