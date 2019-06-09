@@ -61,6 +61,7 @@ class Faces(BoxLayout):
                 index = len(self.face_list.adapter.data) - 1
                 if not self.face_list.adapter.get_view(index).is_selected:
                     self.face_list.adapter.get_view(index).trigger_action(duration=0)
+                self.name_text_input.text = ""
 
         else:
             self.info = "name cannot be empty"
@@ -87,22 +88,23 @@ class Faces(BoxLayout):
             # check file extensions
             if self.picture_list:
                 self.picture_list = [x for x in self.picture_list if x.endswith('jpg') or x.endswith('png')]
+                # create new objects
+                if self.picture_list:
+                    for i in range(len(faces)):
+                        if faces[i].name == selection:
+                            faces.pop(Faces.get_face_index(selection))
+                            self.info = "item has been overwritten"
+
+                    selected_face = Face(selection, self.picture_list)
+                    faces.append(copy.copy(selected_face))
+                else:
+                    self.info = "no useful files found"
             else:
                 self.info = "no pictures have been selected"
         else:
             self.info = "select item to upload pictures"
 
-        # create new objects
-        if self.picture_list:
-            for i in range(len(faces)):
-                if faces[i].name == selection:
-                    faces.pop(Faces.get_face_index(selection))
-                    self.info = "item has been overwritten"
 
-            selected_face = Face(selection, self.picture_list)
-            faces.append(copy.copy(selected_face))
-        else:
-            self.info = "no useful files found"
 
         print("list: ")
         for i in range(len(faces)):
