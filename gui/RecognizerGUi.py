@@ -98,6 +98,7 @@ def Start(Persons):
             break
 
         frame = imutils.resize(frame, width=500)
+        frame2 =frame
         (H, W) = frame.shape[:2]
         if(True):
 
@@ -110,12 +111,31 @@ def Start(Persons):
                 if success:
                     (x, y, w, h) = [int(v) for v in box]
                     tracpos.append((x, y, w, h))
-                    cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-                    cv2.putText(frame, tag, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
+                    cv2.rectangle(frame2, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                    cv2.putText(frame2, tag, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
                 else:
                     name_list.remove(tag)
                     track_list.remove(one_tracker)
                 i += 1
+            i =0
+            for one_tracker in track_list:
+                tag = name_list[i]
+                if (tag=="Unknow"):
+                    if i < tracpos.__len__():
+                        trackd =  tracpos.copy()
+                        trackd.remove(tracpos[i])
+
+                        (x, y, w, h) = tracpos[i]
+                        for trac in trackd:
+
+                            (x1, y1, w1, h1) = trac
+                            if ((x1 < x + 0.5 * w < x1 + w1) and (y1 < y + 0.5 * h < y1 + h1) and (
+                                    x < x1 + 0.5 * w1 < x + w) and (y < y1 + 0.5 * h1 < y + h)):
+                                name_list.remove(tag)
+                                track_list.remove(one_tracker)
+                i += 1
+
+
 
             face_locations = face_cascade.detectMultiScale(frame, 1.3, 5)
             # start OpenCV object tracker using the supplied bounding box
@@ -170,7 +190,7 @@ def Start(Persons):
 
                     # grab the new bounding box coordinates of the object
 
-        cv2.imshow("Frame", frame)
+        cv2.imshow("Frame", frame2)
         key = cv2.waitKey(1) & 0xFF
 
         if key == ord("q"):
