@@ -37,6 +37,8 @@ class Faces(BoxLayout):
     # method called by "Train" button
     def train(self):
         print("training!")
+        RecognizerGUi.Start(self.persons)
+
 
 
 
@@ -56,6 +58,10 @@ class Faces(BoxLayout):
             if not check_name:
                 self.face_list.adapter.data.extend([face_name])
                 self.face_list._trigger_reset_populate()
+                index = len(self.face_list.adapter.data) - 1
+                if not self.face_list.adapter.get_view(index).is_selected:
+                    self.face_list.adapter.get_view(index).trigger_action(duration=0)
+
         else:
             self.info = "name cannot be empty"
 
@@ -119,6 +125,8 @@ class Faces(BoxLayout):
             if f.name == name:
                 return i
         return -1
+
+
 
 class InterfaceApp(App):
     def build(self):
